@@ -94,17 +94,4 @@
 		</profile>
 	</profiles>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>birdseye-snapshots</id>
-			<name>birdseye Snapshots</name>
-			<url>https://maven.birdseyesecurity.com/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>birdseye-releases</id>
-			<name>birdseye Releases</name>
-			<url>https://maven.birdseyesecurity.com/releases</url>
-		</repository>
-	</distributionManagement>
-
 </project>

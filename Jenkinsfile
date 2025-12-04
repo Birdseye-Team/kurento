@@ -38,9 +38,13 @@ pipeline {
                 }
             }
             steps {
-                // Uses <distributionManagement> from pom.xml
+                // Uses altDeploymentRepository properties instead of <distributionManagement>
                 withMaven(maven: MVN) {
-                    sh 'mvn -B -Pdeploy deploy'
+                    sh '''
+                        mvn -B -Pdeploy deploy \
+                            -DaltSnapshotDeploymentRepository=birdseye-snapshots::default::https://maven.birdseyesecurity.com/snapshots \
+                            -DaltReleaseDeploymentRepository=birdseye-releases::default::https://maven.birdseyesecurity.com/releases
+                    '''
                 }
             }
         }
