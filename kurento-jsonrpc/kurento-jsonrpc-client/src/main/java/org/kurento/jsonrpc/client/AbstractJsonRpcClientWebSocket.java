@@ -61,10 +61,13 @@ import com.google.gson.JsonObject;
 
 public abstract class AbstractJsonRpcClientWebSocket extends JsonRpcClient {
 
-  private static final int CONNECTION_LOCK_TIMEOUT = 25000;
-
   private static Logger log = LoggerFactory.getLogger(AbstractJsonRpcClientWebSocket.class);
-
+  
+  // Birdseye 2025-12-03: stanasic -- externalized
+  protected static final int CONNECTION_LOCK_TIMEOUT = 
+      PropertiesManager.getProperty("jsonRpcClientWebSocket.connectionLockTimeout", 5000);
+  // --
+  
   protected static final long RECONNECT_DELAY_TIME_MILLIS =
       PropertiesManager.getProperty("jsonRpcClientWebSocket.reconnectionDelay", 2000);
 
