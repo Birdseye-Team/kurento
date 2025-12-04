@@ -873,6 +873,10 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-failsafe-plugin</artifactId>
 					<version>${version.failsafe.plugin}</version>
+					<configuration>
+						<!-- Add JVM arguments to fix Java 9+ module access for GSON reflection -->
+						<argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -1066,6 +1070,8 @@
 						<systemProperties>
 							<java.io.tmpdir>${project.build.directory}</java.io.tmpdir>
 						</systemProperties>
+						<!-- Add JVM arguments to fix Java 9+ module access for GSON reflection -->
+						<argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -1189,6 +1195,8 @@
 							<doUpdate>false</doUpdate>
 							<revisionOnScmFailure>UNKNOWN</revisionOnScmFailure>
 							<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+							<useLastCommittedRevision>true</useLastCommittedRevision>
+							<shortRevisionLength>8</shortRevisionLength>
 						</configuration>
 					</execution>
 				</executions>
