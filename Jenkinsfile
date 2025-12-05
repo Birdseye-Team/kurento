@@ -38,13 +38,9 @@ pipeline {
                 }
             }
             steps {
-                // Uses altDeploymentRepository properties (correct format: id::url)
+                // Uses distributionManagement from kurento-parent-pom (command-line params don't work with Maven 3.8.4)
                 withMaven(maven: MVN) {
-                    sh '''
-                        mvn -B -Pdeploy deploy \
-                            -DaltSnapshotDeploymentRepository=birdseye-snapshots::https://maven.birdseyesecurity.com/snapshots \
-                            -DaltReleaseDeploymentRepository=birdseye-releases::https://maven.birdseyesecurity.com/releases
-                    '''
+                    sh 'mvn -B -Pdeploy deploy'
                 }
             }
         }

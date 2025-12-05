@@ -1432,13 +1432,19 @@
 		</profile>
 	</profiles>
 
-	<!--
-	Kurento projects don't define a <distributionManagement> section with the
-	repositories used for deployment. Instead, CI injects a `settings.xml` file
-	with a "deploy" profile that configures maven-deploy-plugin through properties
-	`altSnapshotDeploymentRepository` and `altReleaseDeploymentRepository`.
-	Refer to Jenkins Managed File "Kurento GitHub Maven settings.xml".
-	<distributionManagement></distributionManagement>
-	-->
+	<!-- Birdseye: Using distributionManagement as command-line altDeploymentRepository 
+	     parameters don't work reliably with Maven 3.8.4 and deploy-plugin 2.7 -->
+	<distributionManagement>
+		<snapshotRepository>
+			<id>birdseye-snapshots</id>
+			<name>birdseye Snapshots</name>
+			<url>https://maven.birdseyesecurity.com/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>birdseye-releases</id>
+			<name>birdseye Releases</name>
+			<url>https://maven.birdseyesecurity.com/releases</url>
+		</repository>
+	</distributionManagement>
 
 </project>
