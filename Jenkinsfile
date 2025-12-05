@@ -38,12 +38,12 @@ pipeline {
                 }
             }
             steps {
-                // Uses altDeploymentRepository properties instead of <distributionManagement>
+                // Uses altDeploymentRepository properties (correct format: id::url)
                 withMaven(maven: MVN) {
                     sh '''
                         mvn -B -Pdeploy deploy \
-                            -DaltSnapshotDeploymentRepository=birdseye-snapshots::default::https://maven.birdseyesecurity.com/snapshots \
-                            -DaltReleaseDeploymentRepository=birdseye-releases::default::https://maven.birdseyesecurity.com/releases
+                            -DaltSnapshotDeploymentRepository=birdseye-snapshots::https://maven.birdseyesecurity.com/snapshots \
+                            -DaltReleaseDeploymentRepository=birdseye-releases::https://maven.birdseyesecurity.com/releases
                     '''
                 }
             }
