@@ -39,7 +39,7 @@ pipeline {
             }
             steps {
                 // Uses distributionManagement from kurento-parent-pom (command-line params don't work with Maven 3.8.4)
-                withMaven(maven: MVN) {
+                withMaven(maven: MVN, globalMavenSettingsConfig: 'maven.birdseyesecurity.com') {
                     sh 'mvn -B -Pdeploy deploy'
                 }
             }
