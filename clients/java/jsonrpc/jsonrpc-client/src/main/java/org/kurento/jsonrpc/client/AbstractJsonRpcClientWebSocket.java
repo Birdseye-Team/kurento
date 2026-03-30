@@ -61,8 +61,6 @@ import com.google.gson.JsonObject;
 
 public abstract class AbstractJsonRpcClientWebSocket extends JsonRpcClient {
 
-  private static final int CONNECTION_LOCK_TIMEOUT = 25000;
-
   private static Logger log = LoggerFactory.getLogger(AbstractJsonRpcClientWebSocket.class);
 
   protected static final long RECONNECT_DELAY_TIME_MILLIS =
@@ -70,6 +68,10 @@ public abstract class AbstractJsonRpcClientWebSocket extends JsonRpcClient {
 
   private long requestTimeout =
       PropertiesManager.getProperty("jsonRpcClientWebSocket.timeout", 60000);
+
+  // Birdseye 2025-12-03: apejakovic -- externalized
+  protected static final int CONNECTION_LOCK_TIMEOUT =
+          PropertiesManager.getProperty("jsonRpcClientWebSocket.connectionLockTimeout", 5000);
 
   protected static final int maxPacketSize =
       PropertiesManager.getProperty("jsonRpcClientWebSocket.packetSize", 1000000);
