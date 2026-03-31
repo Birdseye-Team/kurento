@@ -25,7 +25,7 @@ pipeline {
             }
             steps {
                 withMaven(maven: MVN) {
-                    sh 'mvn -B clean verify'
+                    sh 'mvn -B -f clients/java/pom.xml clean verify'
                 }
             }
         }
@@ -40,7 +40,7 @@ pipeline {
             steps {
                 // Uses distributionManagement from kurento-parent-pom (command-line params don't work with Maven 3.8.4)
                 withMaven(maven: MVN, globalMavenSettingsConfig: 'maven.birdseyesecurity.com') {
-                    sh 'mvn -B -Pdeploy deploy'
+                    sh 'mvn -B -f clients/java/pom.xml -Pdeploy deploy'
                 }
             }
         }
