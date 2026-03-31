@@ -1,21 +1,19 @@
-def MVN = 'Maven 3.8.4'
+def MVN = 'maven-3.9'
 
 pipeline {
     agent any
-
-
+    tools {
+        jdk 'JDK25'
+    }
     environment {
-        // Adjust if you use a specific Maven tool installation in Jenkins
         MAVEN_OPTS = "-Dmaven.test.skip=false"
     }
-
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-
         stage('Build & Test') {
             when {
                 anyOf {
@@ -29,7 +27,6 @@ pipeline {
                 }
             }
         }
-
         stage('Deploy') {
             when {
                 anyOf {
@@ -38,18 +35,15 @@ pipeline {
                 }
             }
             steps {
-                // Uses distributionManagement from kurento-parent-pom (command-line params don't work with Maven 3.8.4)
                 withMaven(maven: MVN, globalMavenSettingsConfig: 'maven.birdseyesecurity.com') {
                     sh 'mvn -B -f clients/java/pom.xml -Pdeploy deploy'
                 }
             }
         }
     }
-
     post {
         always {
             script {
-                // Only publish JUnit results if Build & Test stage ran (i.e., on release branches)
                 if (env.BRANCH_NAME == 'release' || env.BRANCH_NAME ==~ /^release-.*/) {
                     junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
                 }
