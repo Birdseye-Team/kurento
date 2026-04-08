@@ -23,6 +23,7 @@ pipeline {
             }
             steps {
                 withMaven(maven: MVN) {
+                    sh 'mvn -B -f clients/java/qa-pom/pom.xml clean verify'
                     sh 'mvn -B -f clients/java/pom.xml clean verify'
                 }
             }
@@ -36,6 +37,7 @@ pipeline {
             }
             steps {
                 withMaven(maven: MVN, globalMavenSettingsConfig: 'maven.birdseyesecurity.com') {
+                    sh 'mvn -B -f clients/java/qa-pom/pom.xml clean verify'
                     sh 'mvn -B -f clients/java/pom.xml -Pdeploy deploy'
                 }
             }
