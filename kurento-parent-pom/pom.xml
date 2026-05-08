@@ -13,7 +13,7 @@
 		<relativePath/>
 	</parent>
 	<artifactId>kurento-parent-pom</artifactId>
-	<version>6.18.0-b1-SNAPSHOT</version>
+	<version>6.18.0-b2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- Project-level information -->
