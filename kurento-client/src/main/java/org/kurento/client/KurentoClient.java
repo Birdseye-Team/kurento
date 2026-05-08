@@ -353,6 +353,10 @@ public class KurentoClient {
     return this.destroyed;
   }
 
+  public boolean isClientClosed() {
+    return this.client == null || this.client.isClosedByUser();
+  }
+
   public static KurentoClient createFromJsonRpcClient(JsonRpcClient jsonRpcClient) {
     return new KurentoClient(jsonRpcClient);
   }
