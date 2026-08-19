@@ -3,6 +3,9 @@ def MVN = 'Maven 3.8.4'
 pipeline {
     agent any
 
+    tools {
+        jdk 'JDK25'
+    }
 
     environment {
         // Adjust if you use a specific Maven tool installation in Jenkins
